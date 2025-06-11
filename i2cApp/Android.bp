@@ -1,0 +1,8 @@
+cc_binary {
+    name: "i2cbin",
+    srcs: ["i2c.cpp"],
+    shared_libs: ["liblog"],
+    cflags: ["-std=c++11"], 
+}
+
+

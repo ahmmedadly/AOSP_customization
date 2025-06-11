@@ -1,0 +1,10 @@
+type i2cservice, domain;
+type i2cservice_exec, exec_type, file_type,vendor_file_type;
+type i2cservice_api, service_manager_type;
+
+
+allow i2cservice i2cservice_api:service_manager add;
+allow i2cservice servicemanager:binder {call transfer};
+allow init i2cservice_exec:file { getattr open read execute map };
+
+init_daemon_domain(i2cservice);

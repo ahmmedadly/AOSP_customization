@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:paddingTop="40dp"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/Wal3neeeButton"
+        android:layout_width="match_parent"
+        android:layout_height="81dp"
+        android:textSize="34sp"
+
+        android:text="Wal3neee" />
+
+    <Button
+        android:id="@+id/EtfeneeeButton"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:layout_marginTop="40dp"
+        android:textSize="34sp"
+    android:text="Etfeneee" />
+
+    <TextView
+        android:id="@+id/resultTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="El-Far3 State!"
+        android:textSize="34sp" />
+
+</LinearLayout>

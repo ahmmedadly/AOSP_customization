@@ -1,0 +1,10 @@
+cc_library_shared {
+    name: "libitochal",
+    srcs: ["src/hali2c.cpp"],
+    shared_libs: ["liblog"],
+    export_include_dirs: ["inc"],
+    include_dirs : ["vendor/iti/I2cHal/inc"],
+
+    vendor :true,
+
+}

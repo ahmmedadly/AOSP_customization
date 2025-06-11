@@ -1,0 +1,19 @@
+cc_binary {
+    name: "i2cservice",
+    relative_install_path: "hw",
+    srcs: ["**/*.cpp"],
+    shared_libs: [    "libc++",
+        "libbinder_ndk",
+        "libbinder",
+        "libutils",
+        "libbase",
+        "liblog",
+        "libcutils",
+        "libitochal",
+        "android.vendor.i2c-V1-ndk"],  
+    vendor:true, 
+    ldflags: ["-u", "-main"],
+    init_rc: ["initi2cservice.rc"],
+}
+
+
