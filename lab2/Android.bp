@@ -1,0 +1,6 @@
+cc_binary {
+    name: "togleled",
+    srcs: ["src/togleled.cpp"],
+    shared_libs: ["libc++"],
+    vendor:true, 
+}

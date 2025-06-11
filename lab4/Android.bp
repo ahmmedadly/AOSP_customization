@@ -1,0 +1,7 @@
+cc_binary {
+    name: "ledtoggleshared",
+    srcs: ["src/ledtoggle.cpp"],
+    shared_libs: ["libc++","gpiohal"],  
+    vendor:true, 
+    init_rc: ["ledinit.rc"],
+}

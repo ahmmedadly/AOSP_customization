@@ -1,0 +1,6 @@
+cc_binary {
+    name: "HelloWorld",
+    srcs: ["src/HelloWorld.cpp"],
+    shared_libs: ["libc++"],
+    vendor:true, 
+}

@@ -1,0 +1,6 @@
+
+type ledinitservice,domin;
+type ledinitservice_exec , exec_type,file_type;
+
+type_transition init ledinitservice_exec:process ledinitservice;
+allow init ledinitservice_exec:file {read executable};

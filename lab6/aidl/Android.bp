@@ -1,0 +1,30 @@
+aidl_interface {
+    name: "android.vendor.gpio",
+
+    srcs: [
+        "android/vendor/gpio/*.aidl",
+    ],
+    stability: "vintf",
+    backend: {
+        java: {
+            enabled: true,
+
+        },
+        ndk: {
+            enabled: true,
+
+        },
+        cpp: {
+            enabled: false,
+        },
+    },
+    vendor_available: true,
+    versions_with_info: [
+        {
+            version: "1",
+            imports: [],
+        },
+    ],
+    frozen: true,
+
+}

@@ -1,0 +1,8 @@
+service inithelloservice /vendor/bin/hw/inithelloservice
+    class hal
+    user root
+    group root
+    seclabel u:object_r:inithelloservice_exec:s0
+    
+on boot 
+	start inithelloservice

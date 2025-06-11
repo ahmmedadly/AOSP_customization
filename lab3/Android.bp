@@ -1,0 +1,8 @@
+cc_binary {
+    name: "ledtoggles",
+srcs: ["src/ledtoggle.cpp"],
+shared_libs: ["libc++","gpiohal"],
+ include_dirs : ["vendor/iti/libs/libgpiohal/inc"],
+vendor:true, 
+
+}

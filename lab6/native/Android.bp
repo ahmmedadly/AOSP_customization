@@ -1,0 +1,19 @@
+cc_binary {
+    name: "initledservice",
+    relative_install_path: "hw",
+    srcs: ["**/*.cpp"],
+    shared_libs: [    "libc++",
+        "libbinder_ndk",
+        "libbinder",
+        "libutils",
+        "libbase",
+        "liblog",
+        "libcutils",
+        "gpiohal",
+        "android.vendor.gpio-V1-ndk"],  
+    vendor:true, 
+    ldflags: ["-u", "-main"],
+    init_rc: ["initledservice.rc"],
+}
+
+

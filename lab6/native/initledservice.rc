@@ -1,0 +1,8 @@
+service initledservice /vendor/bin/hw/initledservice
+    class hal
+    user root
+    group root
+    seclabel u:object_r:initledservice_exec:s0
+    
+on boot 
+	start initledservice

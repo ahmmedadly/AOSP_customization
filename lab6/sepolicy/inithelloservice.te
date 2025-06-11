@@ -1,0 +1,10 @@
+type initledservice, domain;
+type initledservice_exec, exec_type, file_type,vendor_file_type;
+type initledservice_api, service_manager_type;
+
+
+allow initledservice initledservice_api:service_manager add;
+allow initledservice servicemanager:binder {call transfer};
+allow init initledservice_exec:file { getattr open read execute map };
+
+init_daemon_domain(initledservice);
