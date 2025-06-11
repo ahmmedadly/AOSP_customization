@@ -21,18 +21,26 @@ public class MainActivity extends AppCompatActivity {
 
     II2cService ii2cService;
     private SeekBar seekBar;
-
     private TextView resultTextView;
+
+    private volatile boolean isRunning = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        // Initialize the TextView
+
         resultTextView = findViewById(R.id.resultTextView);
         seekBar = findViewById(R.id.seekBar);
 
-        // Bind to the AIDL service
+        bindToService();
+
+        // Start update thread
+        startValueUpdater();
+    }
+
+    private void bindToService() {
         try {
             Class<?> serviceManagerClass = Class.forName("android.os.ServiceManager");
             Method getServiceMethod = serviceManagerClass.getMethod("getService", String.class);
@@ -48,46 +56,40 @@ public class MainActivity extends AppCompatActivity {
                     Log.e("ServiceBinding", "Failed to get ii2cService binder.");
                 }
             }
-        } catch (ClassNotFoundException e) {
-            Log.e("ServiceBinding", "Class not found: " + e.getMessage());
-        } catch (NoSuchMethodException e) {
-            Log.e("ServiceBinding", "Method not found: " + e.getMessage());
-        } catch (InvocationTargetException e) {
-            Log.e("ServiceBinding", "Invocation target exception: " + e.getMessage());
-        } catch (IllegalAccessException e) {
-            Log.e("ServiceBinding", "Illegal access exception: " + e.getMessage());
+        } catch (Exception e) {
+            Log.e("ServiceBinding", "Error binding service: " + e.getMessage());
         }
-
-        // Setup button listeners
-        setupButtons();
-
     }
-    private void setupButtons() {
-        Button WheelButton = findViewById(R.id.WheelButton);
 
+    private void startValueUpdater() {
+        new Thread(() -> {
+            while (isRunning) {
+                if (ii2cService != null) {
+                    try {
+                        int val = ii2cService.getWhealAngle();
+                        int mappedValue = (val * 100) / 66;
 
-        
-        WheelButton.setOnClickListener(v -> {
-            Log.d("MainActivity", "Date button clicked");
-            if (ii2cService != null) {
-                try {
-                    int val = ii2cService.getWhealAngle();
-                    Log.d("MainActivity", "value = "+val );
-                  //  resultTextView.setText("Value = "+val);
-                    int mappedValue = (val * 100) / 66;
-
-                    resultTextView.setText("Mapped Value: " + mappedValue);
-                    Log.d("SeekBar", "Mapped Value: " + mappedValue);
-
-                    seekBar.setProgress(mappedValue);
-                } catch (RemoteException e) {
-                    Log.e("MainActivity", "RemoteException: " + e.getMessage());
-                    resultTextView.setText("RemoteException getting date");
+                        runOnUiThread(() -> {
+                            resultTextView.setText("Mapped Value: " + mappedValue);
+                            seekBar.setProgress(mappedValue);
+                        });
+                    } catch (RemoteException e) {
+                        Log.e("I2C", "RemoteException: " + e.getMessage());
+                    }
                 }
-            } else {
-                Log.e("MainActivity", "helloService is null");
-                resultTextView.setText("Service not bound");
+
+                try {
+                    Thread.sleep(500); // wait 1 second
+                } catch (InterruptedException e) {
+                    Log.e("Thread", "Interrupted: " + e.getMessage());
+                }
             }
-        });
+        }).start();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        isRunning = false; // Stop thread when activity is destroyed
     }
 }
