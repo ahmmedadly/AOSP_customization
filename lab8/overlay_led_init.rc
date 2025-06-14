@@ -1,0 +1,9 @@
+service overlay_led_init /vendor/bin/overlay_led_init
+    class late_start
+    user root
+    group root
+    seclabel u:r:vendor_init:s0
+    oneshot
+
+on boot
+    start overlay_led_init

@@ -1,0 +1,10 @@
+type overlay_led_init, domain;
+type overlay_led_init_exec, exec_type, file_type,vendor_file_type;
+type overlay_led_init_api, service_manager_type;
+
+
+allow overlay_led_init overlay_led_init_api:service_manager add;
+allow overlay_led_init servicemanager:binder {call transfer};
+allow init overlay_led_init_exec:file { getattr open read execute map };
+
+init_daemon_domain(overlay_led_init);

@@ -1,0 +1,26 @@
+android_app {
+    name: "TestLogAppV1",
+    srcs: ["src/**/*.java"],
+    manifest: "AndroidManifest.xml",
+    sdk_version: "",
+    platform_apis: true, 
+    privileged: true,    
+     static_libs: [
+        "android.car.cluster.navigation",
+        "androidx.legacy_legacy-support-v4",
+        "androidx-constraintlayout_constraintlayout",
+        "car-media-common",
+        "car-telephony-common",
+        "car-apps-common",
+    ],
+        overrides: [
+        "Launcher2",
+        "Launcher3",
+        "Launcher3QuickStep",
+        "CarLauncher",
+    ],
+
+    libs: ["android.car"],
+    installable: true,
+}
+
