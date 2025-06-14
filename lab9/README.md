@@ -23,12 +23,6 @@ Run the following commands:
 ```bash
 adb root
 adb shell mount -o remount,rw /
-
-adb shell mkdir -p /system/priv-app/MyApp
-adb push vendor/iti/lab9/app-debug.apk /system/priv-app/MyApp/
-
-adb shell chmod 755 /system/priv-app/MyApp
-adb shell chmod 644 /system/priv-app/MyApp/app-debug.apk
-adb shell chown root:root /system/priv-app/MyApp/app-debug.apk
-
-adb reboot
+adb push vendor/iti/lab9/app-debug.apk /system/priv-app
+adb shell
+reboot
